@@ -10,10 +10,13 @@ public class quicksorter {
 
     }
     public static void quicksort(int[] array, int low, int high) {
+        if (high-low<=1) return;
         int pivot = choosePivot(low, high);
-        int lowPoint=0;
-        int highPoint=0;
+        int lowPoint;
+        int highPoint;
         do {
+            lowPoint=-1;
+            highPoint=-1;
             for (int i = low; i < high; i++)
                 if (array[i] > array[pivot]) {
                     highPoint = i;
@@ -25,7 +28,11 @@ public class quicksorter {
                     break;
                 }
             swap(array, highPoint, lowPoint);
-        } while (lowPoint > highPoint);
+        } while (lowPoint > highPoint && highPoint!=-1);
+        swap(array, highPoint, lowPoint); // these get swapped once when they shouldn't. this undoes that
+        swap (array, pivot, lowPoint+1);
+        quicksort(array, low, lowPoint+1);
+        quicksort(array, lowPoint+2, high);
     }
 
     public static void quicksort(int[] array) {
@@ -35,6 +42,7 @@ public class quicksorter {
         return high-1;
     }
     private static void swap(int[] array, int a, int b) {
+        if (a<0 || b<0) return;
         int i = array[a];
         array[a] = array[b];
         array[b] = i;
