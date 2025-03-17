@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class quicksorter {
     public static void main(String[] args) {
-        for (int i : new int[]{0,10,50}) {
+        for (int i : new int[]{0, 10, 50, 200}) {
             System.out.println("Verifying sort of length " + i + "...");
             int[] list = genArray(i);
             System.out.println("Random array: " + Arrays.toString(list));
